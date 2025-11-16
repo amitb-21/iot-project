@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "author": "Vehicle Safety System",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-mpu6050", "id": "mpu", "top": -53.78, "left": 175.12, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led_green",
+      "top": 6,
+      "left": -255.4,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_red",
+      "top": 6,
+      "left": -303.4,
+      "attrs": { "color": "red" }
+    },
+    { "type": "wokwi-buzzer", "id": "buzzer", "top": 204, "left": -123, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 81.05,
+      "left": -212.6,
+      "rotate": 180,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 119.45,
+      "left": -222.2,
+      "rotate": 180,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "mpu:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "mpu:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "mpu:SCL", "esp:D22", "yellow", [ "v0" ] ],
+    [ "mpu:SDA", "esp:D21", "blue", [ "v0" ] ],
+    [ "esp:D25", "r1:1", "green", [ "v-4.9", "h-158.6" ] ],
+    [ "r1:2", "led_green:A", "green", [ "v0.3", "h-19.4" ] ],
+    [ "led_green:C", "esp:GND.2", "black", [ "v86.4", "h202", "v14.6" ] ],
+    [ "esp:D26", "r2:1", "red", [ "h0" ] ],
+    [ "r2:2", "led_red:A", "red", [ "v0.3", "h-57.8" ] ],
+    [ "led_red:C", "esp:GND.2", "black", [ "h0.4", "v96", "h201.6", "v5" ] ],
+    [ "esp:D27", "buzzer:1", "orange", [ "h-149", "v244.4" ] ],
+    [ "buzzer:2", "esp:GND.2", "black", [ "h47.6", "v-134.4", "h43.4" ] ]
+  ],
+  "dependencies": {}
+}
